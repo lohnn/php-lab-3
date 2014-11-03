@@ -7,7 +7,8 @@ use model\user\UserList;
 
 require_once 'user/UserList.php';
 
-class UserManagement {
+class UserManagement
+{
 
     /**
      * @var UserList
@@ -19,11 +20,17 @@ class UserManagement {
      */
     private $loggedIn = false;
 
-    private function getUser() {
-        
+    /**
+     * Returns the userlist from users
+     * @return array
+     */
+    private function getUsers()
+    {
+        return $this->users->getUsers();
     }
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->users = new UserList();
     }
 
@@ -31,7 +38,8 @@ class UserManagement {
      * Checks if you are logged in
      * @return boolean True if logged in
      */
-    public function isLoggedIn() {
+    public function isLoggedIn()
+    {
         return $this->loggedIn;
     }
 
@@ -40,12 +48,12 @@ class UserManagement {
      * @param \model\user\User $user
      * @return boolean
      */
-    public function logIn(User $user) {
-        foreach ($this->users->getUsers() as $value) {
-            if ($user->compare($value)) {
-                $this->loggedIn = true;
-                return $this->loggedIn;
-            }
+    public function logIn(User $user)
+    {
+        if (array_key_exists($user->getUsername(), $this->getUsers())
+            && password_verify($user->getPassword(), $this->getUsers()[$user->getUsername()]->getPassword())
+        ) {
+            return true;
         }
         return false;
     }

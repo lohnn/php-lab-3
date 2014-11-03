@@ -5,19 +5,22 @@ namespace model\user;
 /**
  * Stores the users.
  */
-class UserList {
+class UserList
+{
 
     /**
      * @var UserModel[]
      */
     private $users;
 
-    public function __construct() {
-        $this->userModel = array(new User("Admin", "e7cf3ef4f17c3999a94f2c6f612e8a888e5b1026878e4e19398b23bd38ec221a"));
+    public function __construct()
+    {
+        $this->userModel = array("admin" => new User("admin",
+            '$2y$10$SPVJZ03/7W5C7CXh0b33Z.KIZg80cAwNtIcctDcBs02AWiHcCUKAy'));
     }
 
-    public function getUsers() {
+    public function getUsers()
+    {
         return $this->userModel;
     }
-
 }

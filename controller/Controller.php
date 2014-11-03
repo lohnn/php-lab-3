@@ -7,7 +7,8 @@ use view\View;
 
 require_once './model/UserManager.php';
 
-class Controller {
+class Controller
+{
 
     /**
      * @var UserManagement
@@ -23,24 +24,26 @@ class Controller {
      * Sets the view
      * @param View $view
      */
-    public function __construct(View $view) {
+    public function __construct(View $view)
+    {
         $this->view = $view;
         $this->userManagement = new UserManagement();
     }
 
-    public function runApplication() {
+    public function runApplication()
+    {
         if ($this->view->tryingToLogIn()) {
+            //Login successful
             if ($this->userManagement->logIn($this->view->getLoginInfo())) {
-                echo "HELLO";
+                $this->view->showLoggedInPage();
             } else {
-              echo "HI THERE";
+                $this->view->showLoginPage();
             }
+        } elseif ($this->view->tryingToLogOut()) {
+            echo "IMMA LOG OUT!";
         }
-        if ($this->userManagement->isLoggedIn()) {
-            $this->view->showLoggedInPage();
-        } else {
+        else {
             $this->view->showLoginPage();
         }
     }
-
 }

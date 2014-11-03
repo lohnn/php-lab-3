@@ -24,6 +24,10 @@ class User {
         $this->password = $password;
     }
 
+    public function __get($name){
+        //return array();
+    }
+
     public function __toString() {
         return sprintf("%s : %s", $this->username, $this->password);
     }
@@ -36,6 +40,22 @@ class User {
      */
     public function compare(User $user) {
         return ((String) $user === (String) $this);
+    }
+
+    /**
+     * @return String
+     */
+    public function getUsername()
+    {
+        return $this->username;
+    }
+
+    /**
+     * @return String
+     */
+    public function getPassword()
+    {
+        return $this->password;
     }
 
 }

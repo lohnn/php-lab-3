@@ -5,22 +5,27 @@ namespace view;
 use model\user\User;
 
 require_once './model/user/User.php';
+require_once('./passwordLib/passwordLib.php');
 
-class View {
+class View
+{
 
     private static $login = "log_in";
     private static $username = "username";
     private static $password = "password";
 
-    public function __construct() {
-        
+    public function __construct()
+    {
+
     }
 
-    private function loggingInPost() {
+    private function loggingInPost()
+    {
         return true;
     }
 
-    private function loggingInCookie() {
+    private function loggingInCookie()
+    {
         return true;
     }
 
@@ -31,8 +36,14 @@ class View {
      * either with post, cookies or session variable.
      * @return boolean
      */
-    public function tryingToLogIn() {
+    public function tryingToLogIn()
+    {
         return (filter_input(INPUT_POST, self::$login) !== null);
+    }
+
+    public function tryingToLogOut()
+    {
+        return isset($_GET["logout"]);
     }
 
     /**
@@ -40,7 +51,8 @@ class View {
      * Gets the login info as a user.
      * @return User
      */
-    public function getLoginInfo() {
+    public function getLoginInfo()
+    {
         $username = filter_input(INPUT_POST, self::$username);
         $password = filter_input(INPUT_POST, self::$password);
         return new User($username, $password);
@@ -50,7 +62,8 @@ class View {
      * Returns a string with the current time and date specially formatted
      * @return string
      */
-    private function getTimeAndDate() {
+    private function getTimeAndDate()
+    {
         $weekDayArray = array("Måndag", "Tisdag", "Onsdag", "Torsdag", "Fredag", "Lördag", "Söndag");
         $monthArray = array("Januari", "Februari", "Mars", "April", "Maj", "Juni", "Juli", "Augusti", "September", "Oktober", "November", "December");
         $toReturn = $weekDayArray[date("N") - 1] . ", den " . date("j") . " " . $monthArray[date("n") - 1] . " år ";
@@ -61,7 +74,8 @@ class View {
     /**
      * Show page where you log in
      */
-    public function showLoginPage() {
+    public function showLoginPage()
+    {
         $this->showPage("Logga in", '<form method="post">
     <div>
         <label for="username">Username:</label>
@@ -81,7 +95,8 @@ class View {
     /**
      * Page to show when logged in
      */
-    public function showLoggedInPage() {
+    public function showLoggedInPage()
+    {
         $this->showPage("Logged in", '<div>
             <a href="?logout">Log out</a>
         </div>');
@@ -92,7 +107,8 @@ class View {
      * @param String $title Title of page
      * @param String $body Page body
      */
-    private function showPage($title, $body) {
+    private function showPage($title, $body)
+    {
         $body .= $this->getTimeAndDate();
         $body .= "<br />";
         $body .= $this->tryingToLogIn() ? 'true' : 'false';
