@@ -16,7 +16,7 @@ $controller->runApplication();
 ?>
 
 
-<?php
+<!--<?php
 include_once "user_management.php";
 //require '/kint/Kint.class.php';
 //Kint::dump($_COOKIE);
@@ -72,4 +72,4 @@ if (isLoggedIn()) {
 //Måndag, den 8 Juli år 2013. Klockan är [10:59:21]
 ?>
     </body>
-</html>
+</html>-->
