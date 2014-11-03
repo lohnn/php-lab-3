@@ -2,7 +2,9 @@
 
 namespace view;
 
-require_once 'model/User.php';
+use model\user\User;
+
+require_once './model/user/User.php';
 
 class View {
 
@@ -36,12 +38,12 @@ class View {
     /**
      * NOTE! Only use this after tryingToLogin returnes true!
      * Gets the login info as a user.
-     * @return \model\User
+     * @return User
      */
     public function getLoginInfo() {
         $username = filter_input(INPUT_POST, self::$username);
         $password = filter_input(INPUT_POST, self::$password);
-        return new \model\User($username, $password);
+        return new User($username, $password);
     }
 
     /**

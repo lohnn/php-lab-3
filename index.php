@@ -1,14 +1,16 @@
 <?php
+use view\View;
+
 session_start();
 require_once './view/View.php';
 require_once './controller/Controller.php';
+require_once './model/user/User.php';
 
-require_once './model/User.php';
-$temp = new model\User("Testar", "lite");
-$temp1 = new model\User("Testar", "litee");
+$temp = new model\user\User("Testar", "lite");
+$temp1 = new model\user\User("Testar", "litee");
 $toPrint = $temp->compare($temp1) ? 'true' : 'false';
 
-$page = new \view\View();
+$page = new View();
 $controller = new controller\Controller($page);
 $controller->runApplication();
 ?>

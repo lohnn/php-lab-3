@@ -2,33 +2,38 @@
 
 namespace controller;
 
-require_once 'model/UserManagement.php';
+use model\UserManagement;
+use view\View;
+
+require_once './model/UserManager.php';
 
 class Controller {
 
     /**
-     * @var \model\UserManagement
+     * @var UserManagement
      */
     private $userManagement;
 
     /**
-     * @var \view\View
+     * @var View
      */
     private $view;
 
     /**
      * Sets the view
-     * @param \view\View $view
+     * @param View $view
      */
-    public function __construct(\view\View $view) {
+    public function __construct(View $view) {
         $this->view = $view;
-        $this->userManagement = new \model\UserManagement();
+        $this->userManagement = new UserManagement();
     }
 
     public function runApplication() {
         if ($this->view->tryingToLogIn()) {
             if ($this->userManagement->logIn($this->view->getLoginInfo())) {
-                
+                echo "HELLO";
+            } else {
+              echo "HI THERE";
             }
         }
         if ($this->userManagement->isLoggedIn()) {

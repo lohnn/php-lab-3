@@ -2,7 +2,10 @@
 
 namespace model;
 
-require_once 'UserList.php';
+use model\user\User;
+use model\user\UserList;
+
+require_once 'user/UserList.php';
 
 class UserManagement {
 
@@ -21,7 +24,7 @@ class UserManagement {
     }
 
     public function __construct() {
-        $this->users = new \model\UserList();
+        $this->users = new UserList();
     }
 
     /**
@@ -34,7 +37,7 @@ class UserManagement {
 
     /**
      * Log in as the user
-     * @param \model\User $user
+     * @param \model\user\User $user
      * @return boolean
      */
     public function logIn(User $user) {
